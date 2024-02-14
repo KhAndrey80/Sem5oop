@@ -91,14 +91,6 @@ public class UserRepository implements GBRepository {
                 .findFirst().orElseThrow(() -> new RuntimeException("User not found"));
         users.remove(editUser);
 
-        long max = id;
-
-        for (User u : users) {
-            long idx = u.getId();
-            if (max < idx) {
-                u.setId(u.getId() - 1);
-            }
-        }
         write(users);
         return Optional.of(editUser);
     }
